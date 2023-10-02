@@ -22,13 +22,15 @@ public class CreateUserUseCase {
     private final UserDetailsService userDetailsService;
 
     private final JwtService jwtService;
+    private final ValidationUtil validationUtil;
 
 
-    public CreateUserUseCase(UserRepository userRepository, UserMapper userMapper, UserDetailsService userDetailsService, JwtService jwtService) {
+    public CreateUserUseCase(UserRepository userRepository, UserMapper userMapper, UserDetailsService userDetailsService, JwtService jwtService, ValidationUtil validationUtil) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.userDetailsService = userDetailsService;
         this.jwtService = jwtService;
+        this.validationUtil = validationUtil;
     }
 
     @Transactional
@@ -41,11 +43,11 @@ public class CreateUserUseCase {
         return createUserResponse(savedUser, jwt);
     }
 
-    public void validateUserRequest(UserRequestDto userRequestDto) {
-        if (!ValidationUtil.isValidEmail(userRequestDto.email())) {
+    private void validateUserRequest(UserRequestDto userRequestDto) {
+        if (!validationUtil.isValidEmail(userRequestDto.email())) {
             throw new ValidationException("Invalid email");
         }
-        if (!ValidationUtil.isValidPassword(userRequestDto.password())) {
+        if (!validationUtil.isValidPassword(userRequestDto.password())) {
             throw new ValidationException("Invalid password");
         }
     }
