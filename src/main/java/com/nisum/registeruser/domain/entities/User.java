@@ -25,7 +25,6 @@ public class User {
     private LocalDateTime created;
     private LocalDateTime updated;
     private LocalDateTime last_login;
-    private String token;
     private boolean isActive;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "userid")

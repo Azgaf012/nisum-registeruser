@@ -14,8 +14,8 @@ spring:
   sql:
     init:
       mode: always
-
-security:
-  jwt:
-    secret: your-jwt-secret
-    expiration: 86400
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

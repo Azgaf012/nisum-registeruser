@@ -25,7 +25,7 @@ public class UserMapper {
                 .updated(LocalDateTime.now())
                 .last_login(LocalDateTime.now())
                 .phones(convertPhoneDtosToEntities(dto.phones()))
-                .isActive(true)
+                .isActive(Boolean.TRUE)
                 .build();
     }
 
@@ -35,7 +35,6 @@ public class UserMapper {
                 .created(user.getCreated().toLocalDate())
                 .modified(user.getUpdated().toLocalDate())
                 .last_login(user.getLast_login().toLocalDate())
-                .token(user.getToken())
                 .isActive(user.isActive())
                 .build();
     }
