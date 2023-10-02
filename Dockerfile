@@ -7,6 +7,12 @@ WORKDIR /usr/src/app
 # Copy the source code from your local host to the builder container
 COPY . .
 
+# Convert gradlew to Unix format
+RUN sed -i 's/\r//' gradlew
+
+# Make gradlew executable
+RUN chmod +x gradlew
+
 # Build the application
 RUN ./gradlew build
 
